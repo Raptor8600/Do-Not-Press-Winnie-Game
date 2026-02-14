@@ -26,31 +26,40 @@ const updateInitialPos = () => {
 globalThis.addEventListener('resize', updateInitialPos);
 updateInitialPos();
 
-// Merge all NEWS_CATEGORIES from the "500 scripts" file into our log pool
-const LOG_MESSAGES = [
-    ...NEWS_CATEGORIES.BASE,
-    ...NEWS_CATEGORIES.SCANDAL,
-    ...NEWS_CATEGORIES.INSURANCE_SATIRE,
-    ...NEWS_CATEGORIES.CHAOS,
-    ...NEWS_CATEGORIES.LEGAL_DEFENSE
+// Merge only the most high-action/hijinx categories from the library
+const HIJINX_BASE = [
+    ...NEWS_CATEGORIES.SCANDAL.filter(msg => msg.includes('car') || msg.includes('fleeing') || msg.includes('arrested') || msg.includes('Little Tikes')),
+    ...NEWS_CATEGORIES.CHAOS.filter(msg => msg.includes('Gravity') || msg.includes('spinning') || msg.includes(' Senate') || msg.includes('Senate')),
+    ...NEWS_CATEGORIES.LEGAL_DEFENSE.filter(msg => msg.includes('restraining') || msg.includes('Sovereign') || msg.includes('Captain') || msg.includes('immunity'))
 ];
 
-const PRESS_RESPONSES = [
-    "REJECTED! Winnie moved for flavor.",
-    "DENIED! Audit in progress.",
-    "MISS! Winnie is checking the perimeter.",
-    "Winnie used 'Aggressive Manifesting'. It's super effective!",
-    "SIKE! Winnie is chasing a potential lawsuit.",
-    "Paws off! Corporate secrets protected!",
-    "Winnie zoomed past your expectations.",
-    "Denied! Winnie is inspecting a shadow for fraud.",
-    "Nope! Winnie filed a restraining order.",
-    "REALLOCATED! Your click is now kibble.",
-    "Winnie performed a 'Structural Integrity Test' on your click.",
-    "Winnie: 'I accept payments in crypto-kibble, not clicks.'",
-    "NOT TODAY! Winnie is busy being a sovereign citizen.",
-    "Winnie: 'Your click had a pre-existing condition.' Claim denied."
+const CUSTOM_HIJINX = [
+    "Winnie filed a restraining order against your cursor!",
+    "Winnie is fleeing the jurisdiction in her Red Little Tikes car!",
+    "Winnie successfully laundered your click into a squeaky toy.",
+    "Winnie: 'I didn't bite your click, I structural-integrity tested it!'",
+    "Winnie Zoomies engaged! Top speed: ILLEGAL.",
+    "Winnie bribed the physics engine to ignore your request.",
+    "Winnie is currently performing toy-murder on a stuffed duck. Busy!",
+    "Winnie: 'No take, only throw! No click, only zoom!'",
+    "Winnie's Little Tikes car has sovereign immunity!",
+    "Winnie intercepted your click for national security reasons.",
+    "Scandal: Winnie seen escaping a click-chase at 3mph.",
+    "Winnie: 'The mailman is a government auditor. I must bark.'",
+    "Winnie used 'Sad Eyes'. Your click was neutralized by cuteness.",
+    "Winnie is doing doughnuts in city hall. Click denied!",
+    "Winnie: 'I did not eat your click. It was a simulation glitch.'",
+    "Winnie successfully stickied your mouse with orange cheeto dust.",
+    "Winnie: 'I don't have fleas, I have dividends. Hands off!'",
+    "Moppet (the cat) blocked your click for a tuna bribery.",
+    "Winnie is currently hiding inside a backpack. Search failed!",
+    "Winnie: 'Deductible reached. Next click costs 5 treats.'"
 ];
+
+const LOG_MESSAGES = [...HIJINX_BASE, ...CUSTOM_HIJINX];
+
+// We'll use the same wacky pool for immediate press responses too
+const PRESS_RESPONSES = LOG_MESSAGES;
 
 function addLog(msg) {
     const entry = document.createElement('div');
