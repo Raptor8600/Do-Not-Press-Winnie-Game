@@ -2,142 +2,39 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="vite.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Winnie's Flamin' Health Insurance Empire</title>
-  <!-- Use Google Fonts for premium typography -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Do Not Press Winnie</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
-  <!-- News Ticker -->
-  <div id="news-ticker">
-    <div id="news-ticker-content">
+<body class="complexity-0">
+    <div id="app">
+        <div id="bg-overlay"></div>
+
+        <header id="ui-header">
+            <h1 class="premium-title">Winnie is watching you.</h1>
+            <div id="event-log">
+                <div class="log-entry">She's alert now...</div>
+            </div>
+        </header>
+
+        <div id="winnie-anchor" class="interactive-winnie">
+            <img src="https://media.discordapp.net/attachments/1424265734711935076/1471930982889160800/IMG_8075.jpg?ex=6990ba0d&is=698f688d&hm=181c8066a67a1113a4ed077f774daffd9024948541c234d7290563de07500b8b&animated=true"
+                id="winnie-img" alt="Winnie">
+            <div class="press-label">PRESS ME</div>
+        </div>
+
+        <main id="game-container">
+            <!-- Space for other UI elements if needed -->
+        </main>
+
+        <div id="physics-layer"></div>
     </div>
-  </div>
-
-  <div id="loading-overlay">
-    <h1>Loading Empire...</h1>
-  </div>
-
-  <div id="app">
-    <!-- Left Panel: Stats & Meters -->
-    <aside id="left-panel" class="panel glass-panel">
-      <div class="stat-group">
-        <h2>Revenue</h2>
-        <div id="revenue-display" class="big-number">$0</div>
-        <div id="rps-display" class="sub-text">per second: $0</div>
-      </div>
-
-      <div class="meter-group">
-        <h3>Spice Level <span id="spice-val">0</span>/100</h3>
-        <div class="meter-bar-bg">
-          <div id="spice-bar" class="meter-bar spice-fill" style="width: 0%"></div>
-        </div>
-        <p class="meter-desc">High spice risks a Meltdown!</p>
-      </div>
-
-      <div class="meter-group">
-        <h3>Audit Risk <span id="risk-val">0</span>/100</h3>
-        <div class="meter-bar-bg">
-          <div id="risk-bar" class="meter-bar risk-fill" style="width: 0%"></div>
-        </div>
-        <p class="meter-desc">High risk triggers an Audit!</p>
-      </div>
-
-      <div class="stat-group" id="chaos-container" style="display: none;">
-        <h3>Chaos Level</h3>
-        <div id="chaos-display" class="chaos-text">Normal</div>
-      </div>
-
-      <div id="compliance-container" class="panel"
-        style="margin-top: 10px; display: flex; justify-content: space-between; align-items: center;">
-        <div>
-          <strong>Compliance Credits:</strong>
-          <span id="compliance-display">0</span>
-        </div>
-        <button id="compliance-btn" onclick="window.useComplianceCredit()"
-          style="background: var(--revenue-green); color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-family: var(--font-main); font-weight: bold; font-size: 0.7rem;">FILE
-          REPORT</button>
-      </div>
-
-      <!-- Fun Image Area (Card Flip) -->
-      <div id="fun-image-container">
-        <div class="flip-card">
-          <div class="flip-card-inner" id="flip-card-inner">
-            <div class="flip-card-front">
-              <img
-                src="https://media.discordapp.net/attachments/1424265734711935076/1471930982889160800/IMG_8075.jpg?ex=6990ba0d&is=698f688d&hm=181c8066a67a1113a4ed077f774daffd9024948541c234d7290563de07500b8b&animated=true"
-                alt="Winnie Fun" id="winnie-fun-img">
-            </div>
-            <div class="flip-card-back">
-              <h1>Deez Nuts</h1>
-            </div>
-          </div>
-        </div>
-      </div>
-    </aside>
-
-    <!-- Center Panel: The Cheeto & Winnie -->
-    <main id="center-panel" class="panel">
-      <div id="particles-container"></div>
-
-      <div id="winnie-container">
-        <!-- Representing Winnie with CSS/Emoji until image available -->
-        <div id="winnie" class="winnie-character" title="Winnie the Health Insurance CEO">🐕</div>
-      </div>
-
-      <!-- The Giant Hot Cheeto -->
-      <!-- Added explicit onclick handler to wrapper to help debug, but main logic is in JS -->
-      <div id="cheeto-container">
-        <img src="https://www.pngall.com/wp-content/uploads/15/Cheeto-PNG-Photos.png" id="cheeto"
-          class="giant-cheeto-img" alt="Giant Cheeto" draggable="false">
-      </div>
-
-      <!-- Floating Text Container -->
-      <div id="floating-text-container"></div>
-
-      <!-- Meltdown / Audit Overlay -->
-      <div id="event-overlay" class="hidden">
-        <h1 id="event-title">EVENT!</h1>
-        <p id="event-desc">Something is happening...</p>
-      </div>
-    </main>
-
-    <!-- Right Panel: Upgrades & Store -->
-    <aside id="right-panel" class="panel glass-panel">
-
-      <!-- Upgrades Section -->
-      <div id="upgrades-section">
-        <h3>Upgrades</h3>
-        <div id="upgrades-list" class="horizontal-scroll">
-          <!-- Upgrades injected here -->
-        </div>
-      </div>
-
-      <!-- Store Section -->
-      <div id="store-section">
-        <h3>Health Insurance Tiers</h3>
-        <div id="store-list" class="vertical-scroll">
-          <!-- Store items injected here -->
-        </div>
-      </div>
-    </aside>
-  </div>
-
-  <!-- Disclaimer -->
-  <footer id="disclaimer">
-    This is satire. Winnie is innocent. Please do not commit crimes.
-    <button onclick="resetGame()"
-      style="background:transparent; border:1px solid #444; color:#666; cursor:pointer; font-size:0.7em; margin-left:10px; padding:2px 5px;">Reset
-      Save</button>
-  </footer>
-
-  <script type="module" src="main.js"></script>
+    <script type="module" src="script.js"></script>
 </body>
 
 </html>
