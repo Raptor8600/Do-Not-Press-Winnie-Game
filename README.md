@@ -28,9 +28,13 @@ npm run dev
 ```
 Then visit `http://localhost:5173` in your browser.
 
+### PLAY IN BROWSER (no setup)
+https://raptor8600.github.io/Do-Not-Press-Winnie-Game/
+
 ## 🎨 Controls
 - **Mouse**: Chase Winnie around the screen.
 - **Click**: If you're fast enough to click her, the chaos level increases.
 
 ## 📜 License
 MIT
+
